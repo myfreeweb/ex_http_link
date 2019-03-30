@@ -7,6 +7,7 @@ defmodule ExHttpLink.MixProject do
     [
       app: :ex_http_link,
       name: "ex_http_link",
+      description: "An Elixir library for the HTTP Link header as specified in RFC 5988 Web Linking",
       source_url: "https://github.com/myfreeweb/ex_http_link",
       version: "0.1.0",
       elixir: "~> 1.7",
