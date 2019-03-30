@@ -8,7 +8,7 @@ defmodule ExHttpLink.MixProject do
       app: :ex_http_link,
       name: "ex_http_link",
       source_url: "https://github.com/myfreeweb/ex_http_link",
-      version: "0.0.0",
+      version: "0.1.0",
       elixir: "~> 1.7",
       deps: deps(),
       package: package(),
