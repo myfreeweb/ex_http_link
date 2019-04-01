@@ -101,4 +101,37 @@ defmodule ExHttpLink do
       x -> x
     end
   end
+
+  @doc """
+  Generate a Link header.
+
+  ## Examples
+
+      iex> ExHttpLink.generate [ { "http://example.com", {"rel", "example"}, {"rev", "test"} } ]
+      ~S(<http://example.com>; rel="example"; rev="test")
+
+      iex> ExHttpLink.generate [ { "http://example.com/a b c?x=y", {"rel", "example"} } ]
+      ~S(<http://example.com/a%20b%20c?x=y>; rel="example")
+
+      iex> ExHttpLink.generate [ { "http://example.com/a%20b%20c?x=y", {"rel", "example"} } ]
+      ~S(<http://example.com/a%20b%20c?x=y>; rel="example")
+
+      iex> ExHttpLink.generate [ { "http://example.com", {"rel", "example"} }, { "te.st", {"a", "b"}, {"c", ""} } ]
+      ~S(<http://example.com>; rel="example", <te.st>; a="b"; c="")
+
+      iex> ExHttpLink.generate [ { "te.st", {"a", ~S(hello "world")} } ]
+      ~S(<te.st>; a="hello%20%22world%22")
+  """
+  def generate(links) do
+    Stream.map(links, &gen_link/1)
+    |> Enum.join(", ")
+  end
+
+  defp gen_link(link) do
+    [url | rels] = Tuple.to_list(link)
+    rel_text = rels
+      |> Stream.map(fn {k, v} -> "#{k}=\"#{v |> URI.encode}\"" end)
+      |> Enum.join("; ")
+    "<#{url |> URI.decode |> URI.encode}>; #{rel_text}"
+  end
 end

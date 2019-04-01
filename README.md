@@ -7,7 +7,7 @@
 
 From the creator or [HTTPotion] and [a Haskell version of this](https://github.com/myfreeweb/http-link-header)...
 
-An [Elixir] library than implements a parser (TODO: and a writer) for the HTTP Link header as specified in [RFC 5988 "Web Linking"](https://tools.ietf.org/html/rfc5988).
+An [Elixir] library than implements a parser and a writer for the HTTP Link header as specified in [RFC 5988 "Web Linking"](https://tools.ietf.org/html/rfc5988).
 
 Why this when [ex_link_header] exists? This one uses awesome [NimbleParsec] parser combinators instead of messy regexps and [doesn't turn arbitrary strings into atoms](https://engineering.klarna.com/monitoring-erlang-atoms-c1d6a741328e).
 
